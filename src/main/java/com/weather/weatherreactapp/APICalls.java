@@ -1,7 +1,5 @@
 package com.weather.weatherreactapp;
 
-import org.apache.catalina.core.StandardHost;
-import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
