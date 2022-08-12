@@ -7,6 +7,8 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class APICalls {
     public static void main(String[] args) throws Exception {
@@ -21,9 +23,22 @@ public class APICalls {
                 System.out.println(statusLine.getStatusCode() + " " + statusLine.getReasonPhrase());
                 String responseBody = EntityUtils.toString(response.getEntity());
                 System.out.println("Response body: " + responseBody);
+
+                parse(builder.toString());
             }
         }
+    }
 
+    public static String parse(String responseBody) {
+        JSONArray weatherJson = new JSONArray(responseBody);
+        for (int i = 0; i < weatherJson.length(); i++) {
+            JSONObject weatherDetails = weatherJson.getJSONObject(i);
+            int id = weatherDetails.getInt("id");
+            int temp = weatherDetails.getInt("temp");
+            String description = weatherDetails.getString("weather.weather[0].main");
+            System.out.println("Description:" + description);
+        }
+        return null;
     }
 
 }
