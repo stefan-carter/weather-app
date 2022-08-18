@@ -40,8 +40,10 @@ function App() {
       (typeof weather.main != "undefined") ? ((weather.main.temp > 20) ? 'app warm' : 'app')
         : 'app'}>
       <main>
+        <h1 data-cy="hello">Hello</h1>
         <div className="search-box">
           <input
+            data-cy="search"
             type="text"
             className="search-bar"
             placeholder="Search..."
