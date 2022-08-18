@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const api = {
   key: "7783cd001018fdee04ca133b03795210",
@@ -6,6 +6,35 @@ const api = {
 }
 
 function App() {
+
+
+  const [lat, setLat] = useState(0)
+  const [lon, setLon] = useState(0)
+
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLat(position.coords.latitude)
+      setLon(position.coords.longitude)
+    })
+    console.log(lat)
+  }, [])
+
+  const defaultWeather = (lat, lon) => {
+    fetch(`${api.base}weather?lat=${lat}&lon=${lon}&units=metric&APPID=${api.key}`)
+      .then(res => res.json())
+      .then(result => {
+        setWeather(result)
+        setQuery('')
+        console.log(result)
+      });
+  }
+
+  useEffect(() => {
+    if (!(lat === 0 || lon === 0)) {
+      defaultWeather(lat, lon)
+    }
+  }, [lat, lon])
 
   const [query, setQuery] = useState('');
   const [weather, setWeather] = useState({});
@@ -40,7 +69,6 @@ function App() {
       (typeof weather.main != "undefined") ? ((weather.main.temp > 20) ? 'app warm' : 'app')
         : 'app'}>
       <main>
-        <h1 data-cy="hello">Hello</h1>
         <div className="search-box">
           <input
             data-cy="search"
@@ -70,6 +98,7 @@ function App() {
       </main>
     </div>
   );
+
 }
 
 export default App;
