@@ -101,3 +101,12 @@ main {
   font-weight: 700;
   text-shadow: 3px 6px rgba(50, 50, 50, 0.5);
 }
+
+.stats {
+  color: rgb(205, 205, 205);
+  font-size: 20px;
+  font-style: italic;
+  padding: 15px;
+  font-weight: 700;
+  text-shadow: 3px 6px rgba(50, 50, 50, 0.5);
+}

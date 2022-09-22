@@ -15,7 +15,7 @@ public class WeatherReactAppController {
 
     @GetMapping("/api/weatherapp")
     public List<Weather> getWeather() {
-        System.out.println("Come on!");
+        System.out.println("Connection ping");
         return repo.findAll();
     }
 
